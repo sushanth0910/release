@@ -26,6 +26,8 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 var (
@@ -71,7 +73,6 @@ func configureAndRun() error {
 			}
 			defer logger.Close()
 			logFile = logger
-			log.SetOutput(logFile)
 		} else {
 			file, err := os.OpenFile(*logFilePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 			if err != nil {
